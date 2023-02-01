@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import dataReducer from "../features/data-table/dataSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    data: dataReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
