@@ -16,7 +16,7 @@ function DataCell(props: DataCellProps) {
 
   // Variable tailwind styling
   const cellClass =
-    "w-16 h-16 place-content-center flex items-center text-center";
+    "w-16 h-8 lg:w-32 lg:h-16 place-content-center flex items-center text-center border-x-2 border-y-2 rounded";
   const colorClass = (data: string) => {
     if (data === "X") return " bg-primary";
     return " bg-red-400";

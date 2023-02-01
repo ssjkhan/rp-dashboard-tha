@@ -6,6 +6,8 @@ import {} from "../../app/hooks";
 // Type and initial state
 type dataState = {
   data: string[][];
+  rowCount: number;
+  colCount: number;
 };
 
 const initialState: dataState = {
@@ -14,13 +16,15 @@ const initialState: dataState = {
     // initArray safe as string[][] from intialization
     const initArray = [] as string[][];
     for (let i = 0; i < 5; i++) {
-      initArray.push(Array.from({ length: 7 }, (v, i) => {
-        if (i % 2 === 0) return "";
+      initArray.push(Array.from({ length: 7 }, (v, j) => {
+        if ((i + j) % 2 === 0) return "";
         return "X";
       }));
     }
     return initArray;
   })(),
+  rowCount: 5,
+  colCount: 7,
 };
 
 // Payload action types
@@ -57,7 +61,9 @@ export const dataSlice = createSlice({
     deleteCol: (state, action: PayloadAction<DeleteColPayload>) => {
       const { index } = action.payload;
       for (let row = 0; row < state.data.length; row++) {
-        state.data[row].splice(index, 1);
+        if (state.data.length > 1) {
+          state.data[row].splice(index, 1);
+        }
       }
     },
   },
@@ -78,4 +84,8 @@ export const selectDataCell = (state: RootState, row: number, col: number) => {
 
 export const selectDataRow = (state: RootState, row: number) => {
   return state.data.data[row];
+};
+
+export const selectDataSize = (state: RootState) => {
+  return { rowCount: state.data.rowCount, colCount: state.data.colCount };
 };
