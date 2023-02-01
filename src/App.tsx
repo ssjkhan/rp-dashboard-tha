@@ -1,14 +1,15 @@
 import React from "react";
+import DataTable from "./features/data-table/DataTable";
+import SideBar from "./components/side-bar/SideBar";
 
 function App() {
   return (
     <div className="App">
-      <div className="ml-3">
-        <p className="text-sm font-medium text-gray-900">My Team</p>
-        <p className="text-sm text-gray-500">Kitchener</p>
-      </div>
-      <div className="btn">
-        This is a test button
+      <div className="flex">
+        <SideBar />
+        <div className="mx-auto mt-12 justify-center">
+          <DataTable />
+        </div>
       </div>
     </div>
   );
