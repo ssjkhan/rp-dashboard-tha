@@ -21,7 +21,13 @@ function EvalRow(props: EvalRowType) {
   return (
     <div className="flex">
       {Array.from({ length: colCount }).map((_: unknown, colIndex: number) => {
-        const sum = getSum(rowIndex1, rowIndex2, colIndex);
+        var sum;
+        try {
+          sum = getSum(rowIndex1, rowIndex2, colIndex);
+        } catch (e) {
+          console.log(rowIndex1, rowIndex2, colIndex);
+          console.log(e);
+        }
         var className =
           "w-16 h-8 lg:w-32 lg:h-16 place-content-center flex items-center text-center border-2 rounded-md ";
 

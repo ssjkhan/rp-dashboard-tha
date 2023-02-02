@@ -70,7 +70,7 @@ export const evalSlice = createSlice({
     builder.addCase(delRow, (state, action: PayloadAction<DelRowPayload>) => {
       // handle cascading deletes
       const { index } = action.payload;
-      state.evalStatements = state.evalStatements.map((statement, index) => {
+      state.evalStatements = state.evalStatements.map((statement, _) => {
         if (statement.rowIndex1 === index || statement.rowIndex2 === index) {
           statement.rowIndex1 = 0;
           statement.rowIndex2 = 0;
