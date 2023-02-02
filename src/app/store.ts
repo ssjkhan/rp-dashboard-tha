@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import dataReducer from "../features/data-table/dataSlice";
+import dataReducer from "../features/api/dataSlice";
+import evalStatementReducer from "../features/api/evalSlice";
 
 export const store = configureStore({
   reducer: {
     data: dataReducer,
+    evalState: evalStatementReducer,
   },
 });
 
