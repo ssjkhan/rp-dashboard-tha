@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useComponentVisible } from "../../utils/useComponentVisible";
 import {
@@ -59,6 +59,7 @@ function EvalOperandBtn(props: EvalOperandType) {
     dispatch(updateStatement(updateAction));
     setVisible(false);
   };
+
   return (
     <>
       <div

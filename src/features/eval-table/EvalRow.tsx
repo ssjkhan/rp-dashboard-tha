@@ -23,7 +23,7 @@ function EvalRow(props: EvalRowType) {
       {Array.from({ length: colCount }).map((_: unknown, colIndex: number) => {
         const sum = getSum(rowIndex1, rowIndex2, colIndex);
         var className =
-          "w-16 h-8 lg:w-32 lg:h-16 place-content-center flex items-center text-center border-2 rounded-lg ";
+          "w-16 h-8 lg:w-32 lg:h-16 place-content-center flex items-center text-center border-2 rounded-m ";
 
         if (sum === 2) {
           className += " bg-lime-500 text-white";

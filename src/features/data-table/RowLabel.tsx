@@ -39,9 +39,9 @@ function RowLabel(props: RowLabelProps) {
           <div className="flex" key={`label-dataRow-${index}`}>
             {isFirst
               ? (
-                <div className="flex-col justify-end ">
+                <div className="flex items-end ">
                   <div
-                    className="text-white pt-8"
+                    className="text-white py-1 "
                     onClick={() => handleAddBtnClick(index)}
                   >
                     <AddBtn />

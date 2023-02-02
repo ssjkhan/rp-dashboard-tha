@@ -37,7 +37,7 @@ export type AddStatementAction = {
   statement: EvalStatement;
 };
 
-export type DeleteStatementAction = { delIndex: number };
+export type DeleteStatementAction = { index: number };
 
 export type UpdateStatementAction = {
   index: number;
@@ -49,10 +49,12 @@ export const evalSlice = createSlice({
   initialState,
   reducers: {
     deleteStatement: (state, action: PayloadAction<DeleteStatementAction>) => {
-      const { delIndex } = action.payload;
+      const { index: delIndex } = action.payload;
       state.evalStatements = state.evalStatements.filter((_, index) =>
         delIndex != index
       );
+
+      state.count -= 1;
     },
     updateStatement: (state, action: PayloadAction<UpdateStatementAction>) => {
       const { index, statement } = action.payload;
@@ -61,6 +63,7 @@ export const evalSlice = createSlice({
     addStatement: (state, action: PayloadAction<AddStatementAction>) => {
       const { index, statement } = action.payload;
       state.evalStatements.push(statement);
+      state.count += 1;
     },
   },
   extraReducers: (builder) => {
