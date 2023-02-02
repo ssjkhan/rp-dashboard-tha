@@ -19,14 +19,12 @@ function DataCell(props: DataCellProps) {
   const [val, setVal] = useState(DataToSymbol(cellData));
   const dispatch = useAppDispatch();
 
-  // translating
-
   // Variable tailwind styling
   const cellClass =
-    "w-16 h-8 lg:w-32 lg:h-16 place-content-center flex items-center text-center border-x-2 border-y-2 rounded";
+    "w-16 h-8 lg:w-32 lg:h-16 place-content-center flex items-center text-center border-2 rounded";
   const colorClass = (data: number) => {
-    if (data === 1) return " bg-green-400";
-    return " bg-red-400";
+    if (data === 1) return " bg-slate-700 text-white";
+    return " bg-slate-400";
   };
 
   // handlers for events

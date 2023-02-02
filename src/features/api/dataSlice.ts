@@ -17,8 +17,7 @@ const initialState: dataState = {
     const initArray = [] as number[][];
     for (let i = 0; i < 5; i++) {
       initArray.push(Array.from({ length: 7 }, (v, j) => {
-        if ((i + j) % 2 === 0) return 0;
-        return 1;
+        return Math.round(Math.random());
       }));
     }
     return initArray;

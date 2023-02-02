@@ -9,7 +9,7 @@ function SideBar({}: SideBarPropsType) {
         <div className="space-y-3">
           <div className="flex items-center">
             <h2 className="text-2xl font-bold">
-              <span className="text-primary">Riahi</span> Patents Dashboard
+              <span className="text-primary">Riahi</span> Patents
             </h2>
           </div>
           <div className="flex-1">

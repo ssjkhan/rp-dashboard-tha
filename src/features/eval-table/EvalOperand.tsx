@@ -62,7 +62,7 @@ function EvalOperandBtn(props: EvalOperandType) {
   return (
     <>
       <div
-        className="bg-amber-500 px-0 mx-0 lg:px-0.5 rounded text-xs lg:text-base"
+        className="bg-white px-0 mx-0 lg:px-0.5 rounded text-xs lg:text-base text-slate-900"
         onClick={(e) => handleClick(e, 1)}
       >
         R{position === 1 ? rowIndex1 + 1 : rowIndex2 + 1}
@@ -71,7 +71,7 @@ function EvalOperandBtn(props: EvalOperandType) {
         ? (
           <div
             ref={ref}
-            className="absolute z-10 w-full lg:max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+            className="absolute z-10 w-32 lg:max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
           >
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
               {Array.from({ length: dataSize }).map(
