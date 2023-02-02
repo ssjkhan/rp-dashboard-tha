@@ -56,7 +56,6 @@ export const evalSlice = createSlice({
     },
     updateStatement: (state, action: PayloadAction<UpdateStatementAction>) => {
       const { index, statement } = action.payload;
-      console.log(action.payload);
       state.evalStatements[index] = statement;
     },
     addStatement: (state, action: PayloadAction<AddStatementAction>) => {
@@ -69,7 +68,7 @@ export const evalSlice = createSlice({
       // handle cascading deletes
       const { index } = action.payload;
       state.evalStatements = state.evalStatements.map((statement, index) => {
-        if (statement.rowIndex1 === index || statement.rowIndex2 === 0) {
+        if (statement.rowIndex1 === index || statement.rowIndex2 === index) {
           statement.rowIndex1 = 0;
           statement.rowIndex2 = 0;
         }
