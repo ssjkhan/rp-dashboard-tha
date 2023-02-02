@@ -1,4 +1,4 @@
-import { selectDataAll, selectDataSize } from "./dataSlice";
+import { selectDataAll, selectDataSize } from "../api/dataSlice";
 import { useAppSelector } from "../../app/hooks";
 import PercentageCell from "./PercentCell";
 
@@ -21,7 +21,7 @@ function PercentageRow(props: PercentageRowProps) {
   }
 
   return (
-    <div className="flex mt-4 bg-slate-900 rounded-full">
+    <div className="flex mt-1">
       {percentArr.map((_, index) => {
         return <PercentageCell val={percentArr[index]} />;
       })}

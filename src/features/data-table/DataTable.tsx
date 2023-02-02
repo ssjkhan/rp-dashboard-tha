@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
-import { selectDataAll } from "./dataSlice";
+import { selectDataAll } from "../api/dataSlice";
 import HeaderRow from "./HeaderRow";
 import DataRow from "./DataRow";
 import PercentageRow from "./PercentageRow";
@@ -18,7 +18,7 @@ function DataTable({}: DataTableProps) {
         <RowLabel />
         <div>
           <HeaderRow />
-          {data.map((_, rowIndex) => (
+          {data.map((_: string[], rowIndex: number) => (
             <DataRow key={`data-row-${rowIndex}`} rowIndex={rowIndex} />
           ))}
           <PercentageRow />

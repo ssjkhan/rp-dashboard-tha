@@ -1,5 +1,5 @@
 import DataCell from "./DataCell";
-import { selectDataRow } from "./dataSlice";
+import { selectDataRow } from "../api/dataSlice";
 import { useAppSelector } from "../../app/hooks";
 
 type DataRowProps = {
@@ -12,7 +12,7 @@ function DataRow(props: DataRowProps) {
 
   return (
     <div className="flex">
-      {data.map((_, colIndex) => (
+      {data.map((_: string, colIndex: number) => (
         <DataCell
           key={`data-cell-${rowIndex}-${colIndex}`}
           rowIndex={rowIndex}

@@ -1,6 +1,10 @@
-import { FormEvent, SyntheticEvent, useEffect, useState } from "react";
+import { FormEvent, SyntheticEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectDataCell, updateData, UpdateDataPayload } from "./dataSlice";
+import {
+  selectDataCell,
+  updateData,
+  UpdateDataPayload,
+} from "../api/dataSlice";
 
 type DataCellProps = {
   rowIndex: number;
@@ -18,7 +22,7 @@ function DataCell(props: DataCellProps) {
   const cellClass =
     "w-16 h-8 lg:w-32 lg:h-16 place-content-center flex items-center text-center border-x-2 border-y-2 rounded";
   const colorClass = (data: string) => {
-    if (data === "X") return " bg-primary";
+    if (data === "X") return " bg-green-400";
     return " bg-red-400";
   };
 
@@ -33,11 +37,11 @@ function DataCell(props: DataCellProps) {
     setVal(val);
   };
 
-  const handleOnFocus = (e: SyntheticEvent) => {
+  const handleOnFocus = () => {
     setEdit(true);
   };
 
-  const handleOnBlur = (e: any) => {
+  const handleOnBlur = () => {
     const updateAction: UpdateDataPayload = {
       rowIndex: row,
       colIndex: col,
