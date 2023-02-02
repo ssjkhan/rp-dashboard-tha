@@ -40,7 +40,10 @@ function RowLabel(props: RowLabelPropsType) {
             const isFirst = index === 0;
 
             return (
-              <div className="flex h-8 lg:h-16">
+              <div
+                key={`evalTable-rowLable-${index}`}
+                className="flex h-8 lg:h-16"
+              >
                 {isFirst
                   ? (
                     <div className="flex">
