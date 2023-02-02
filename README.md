@@ -6,6 +6,8 @@ Front end dashboard exercise
 
 ###### How to Use: Try it out live [here](https://ssjkhan.github.io/rp-dashboard-tha/)!
 
+![App Screenshot](https://raw.githubusercontent.com/ssjkhan/rp-dashboard-tha/main/images/screenshot.png?raw=true)
+
 ## Features
 
 - Data driven component and state design with redux and redux toolkit
