@@ -40,8 +40,8 @@ Front end dashboard exercise
 
 ## Key TakeAways
 
-- Data driven design greatly aids development timelines and process, making
-  logic easier to reason about
+- Data driven design greatly aids development timelines and processes, making
+  application logic easier to reason about
 - Layouts and understanding client requirements are essential at the planning
   phase of the project. Changes later in the development pipeline are more
   costly in dev time.
