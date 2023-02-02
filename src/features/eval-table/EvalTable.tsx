@@ -1,5 +1,4 @@
 import RowLabel from "./RowLabel";
-import HeaderRow from "../data-table/HeaderRow";
 import EvalRow from "./EvalRow";
 import { useAppSelector } from "../../app/hooks";
 import { selectStatementsSize } from "../api/evalSlice";
