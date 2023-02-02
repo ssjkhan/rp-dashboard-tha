@@ -1,7 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
-  selectDataAll,
   selectDataCell,
   updateData,
   UpdateDataPayload,

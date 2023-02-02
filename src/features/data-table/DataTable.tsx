@@ -10,9 +10,7 @@ type DataTableProps = {};
 
 function DataTable({}: DataTableProps) {
   const data = useAppSelector(selectDataAll);
-  useEffect(() => {
-    console.table(data);
-  }, [data]);
+
   return (
     <div>
       <div className="flex">

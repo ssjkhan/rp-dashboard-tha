@@ -34,6 +34,14 @@ export type UpdateDataPayload = {
   value: number;
 };
 
+export type AddRowPayload = {
+  index: number;
+};
+
+export type DelRowPayload = {
+  index: number;
+};
+
 // State slice
 export const dataSlice = createSlice({
   name: "data",
@@ -48,32 +56,48 @@ export const dataSlice = createSlice({
     },
     addCol: (state, action: PayloadAction<AddColPayload>) => {
       const { index } = action.payload;
-      const updatedData = state.data;
 
-      updatedData.forEach((col) => {
+      state.data.forEach((col) => {
         col.splice(index + 1, 0, 0);
       });
-      state.data = updatedData;
+      state.data = state.data;
       state.colCount += 1;
     },
     deleteCol: (state, action: PayloadAction<DeleteColPayload>) => {
       const { index } = action.payload;
-      const updatedData = state.data;
 
-      for (let row = 0; row < updatedData.length; row++) {
-        if (updatedData.length > 1) {
-          updatedData[row].splice(index, 1);
+      for (let row = 0; row < state.data.length; row++) {
+        if (state.data.length > 1) {
+          state.data[row].splice(index, 1);
         }
       }
 
-      state.data = updatedData;
+      state.data = state.data;
       state.colCount -= 1;
+    },
+    addRow: (state, action: PayloadAction<AddRowPayload>) => {
+      const { index } = action.payload;
+
+      state.data.splice(
+        index + 1,
+        0,
+        Array.from({ length: state.colCount }).fill(0) as number[],
+      );
+
+      state.rowCount += 1;
+    },
+    delRow: (state, action: PayloadAction<DelRowPayload>) => {
+      const { index } = action.payload;
+
+      state.data.splice(index, 1);
+      state.rowCount -= 1;
     },
   },
 });
 
 // export actions and reducer
-export const { resetData, updateData, addCol, deleteCol } = dataSlice.actions;
+export const { resetData, updateData, addCol, deleteCol, addRow, delRow } =
+  dataSlice.actions;
 export default dataSlice.reducer;
 
 // export selectors
