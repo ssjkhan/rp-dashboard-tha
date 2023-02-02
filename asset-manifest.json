@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/rp-dashboard-tha/static/css/main.c204454a.css",
+    "main.js": "/rp-dashboard-tha/static/js/main.d5916389.js",
+    "static/js/787.f366aae1.chunk.js": "/rp-dashboard-tha/static/js/787.f366aae1.chunk.js",
+    "index.html": "/rp-dashboard-tha/index.html",
+    "main.c204454a.css.map": "/rp-dashboard-tha/static/css/main.c204454a.css.map",
+    "main.d5916389.js.map": "/rp-dashboard-tha/static/js/main.d5916389.js.map",
+    "787.f366aae1.chunk.js.map": "/rp-dashboard-tha/static/js/787.f366aae1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c204454a.css",
+    "static/js/main.d5916389.js"
+  ]
+}
