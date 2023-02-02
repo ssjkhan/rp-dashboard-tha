@@ -13,8 +13,11 @@ function RowLabel(props: RowLabelProps) {
 
       {labelArr.map((_, index: number) => {
         return (
-          <div className="w-16 h-8 lg:w-24 lg:h-16 border-y-2 border-r-2 flex place-content-center items-center bg-slate-900 text-white rounded-l">
-            {`R${index}`}
+          <div
+            key={`label-dataRow-${index}`}
+            className="w-16 h-8 lg:w-24 lg:h-16 border-y-2 border-r-2 flex place-content-center items-center bg-slate-900 text-white rounded-l"
+          >
+            {`R${index + 1}`}
           </div>
         );
       })}

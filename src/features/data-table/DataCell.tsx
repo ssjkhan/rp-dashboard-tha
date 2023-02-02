@@ -1,10 +1,11 @@
-import { FormEvent, SyntheticEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   selectDataCell,
   updateData,
   UpdateDataPayload,
 } from "../api/dataSlice";
+import { DataToSymbol, SymbolToData } from "../../utils/dataDisplay";
 
 type DataCellProps = {
   rowIndex: number;
@@ -15,26 +16,28 @@ function DataCell(props: DataCellProps) {
   const { rowIndex: row, colIndex: col } = props;
   const [isEdit, setEdit] = useState(false);
   const cellData = useAppSelector((state) => selectDataCell(state, row, col));
-  const [val, setVal] = useState(cellData);
+  const [val, setVal] = useState(DataToSymbol(cellData));
   const dispatch = useAppDispatch();
+
+  // translating
 
   // Variable tailwind styling
   const cellClass =
     "w-16 h-8 lg:w-32 lg:h-16 place-content-center flex items-center text-center border-x-2 border-y-2 rounded";
-  const colorClass = (data: string) => {
-    if (data === "X") return " bg-green-400";
+  const colorClass = (data: number) => {
+    if (data === 1) return " bg-green-400";
     return " bg-red-400";
   };
 
   // handlers for events
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
     function cellFormValidation(input: any) {
-      if (input === "X" || input === "x") return "X";
-      return "";
+      if (input === "X" || input === "x") return 1;
+      return 0;
     }
 
     const val = cellFormValidation(e.currentTarget.value);
-    setVal(val);
+    setVal(DataToSymbol(val));
   };
 
   const handleOnFocus = () => {
@@ -45,7 +48,7 @@ function DataCell(props: DataCellProps) {
     const updateAction: UpdateDataPayload = {
       rowIndex: row,
       colIndex: col,
-      value: val,
+      value: SymbolToData(val),
     };
 
     dispatch(updateData(updateAction));

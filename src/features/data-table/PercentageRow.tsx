@@ -8,11 +8,10 @@ function PercentageRow(props: PercentageRowProps) {
   const data = useAppSelector(selectDataAll);
   const { rowCount, colCount } = useAppSelector(selectDataSize);
   const percentArr: number[] = Array(colCount).fill(0);
-
   // linear scan and percentage match calculations
   for (let i = 0; i < rowCount; i++) {
     for (let j = 0; j < colCount; j++) {
-      if (data[i][j] === "X") percentArr[j] += 1;
+      percentArr[j] += data[i][j];
     }
   }
 
@@ -23,7 +22,12 @@ function PercentageRow(props: PercentageRowProps) {
   return (
     <div className="flex mt-1">
       {percentArr.map((_, index) => {
-        return <PercentageCell val={percentArr[index]} />;
+        return (
+          <PercentageCell
+            key={`percentageCell-${index}`}
+            val={percentArr[index]}
+          />
+        );
       })}
     </div>
   );

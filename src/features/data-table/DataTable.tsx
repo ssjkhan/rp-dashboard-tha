@@ -18,7 +18,7 @@ function DataTable({}: DataTableProps) {
         <RowLabel />
         <div>
           <HeaderRow />
-          {data.map((_: string[], rowIndex: number) => (
+          {data.map((_: number[], rowIndex: number) => (
             <DataRow key={`data-row-${rowIndex}`} rowIndex={rowIndex} />
           ))}
           <PercentageRow />

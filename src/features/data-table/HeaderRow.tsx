@@ -8,7 +8,9 @@ function HeaderRow(props: HeaderRowProps) {
 
   return (
     <div className="flex">
-      {data.map((_: string, index: number) => <HeaderCell index={index} />)}
+      {data.map((_: number, index: number) => (
+        <HeaderCell key={`headerCell-${index}`} index={index} />
+      ))}
     </div>
   );
 }

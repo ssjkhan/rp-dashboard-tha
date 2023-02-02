@@ -5,7 +5,7 @@ import {} from "../../app/hooks";
 
 // Type and initial state
 type dataState = {
-  data: string[][];
+  data: number[][];
   rowCount: number;
   colCount: number;
 };
@@ -13,12 +13,12 @@ type dataState = {
 const initialState: dataState = {
   // intialize array with 7 elements and 5 rows
   data: (function () {
-    // initArray safe as string[][] from intialization
-    const initArray = [] as string[][];
+    // initArray safe as number[][] from intialization
+    const initArray = [] as number[][];
     for (let i = 0; i < 5; i++) {
       initArray.push(Array.from({ length: 7 }, (v, j) => {
-        if ((i + j) % 2 === 0) return "";
-        return "X";
+        if ((i + j) % 2 === 0) return 0;
+        return 1;
       }));
     }
     return initArray;
@@ -39,7 +39,7 @@ export type DeleteColPayload = {
 export type UpdateDataPayload = {
   rowIndex: number;
   colIndex: number;
-  value: string;
+  value: number;
 };
 
 // State slice

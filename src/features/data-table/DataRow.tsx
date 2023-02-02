@@ -12,7 +12,7 @@ function DataRow(props: DataRowProps) {
 
   return (
     <div className="flex">
-      {data.map((_: string, colIndex: number) => (
+      {data.map((_: number, colIndex: number) => (
         <DataCell
           key={`data-cell-${rowIndex}-${colIndex}`}
           rowIndex={rowIndex}
