@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import {} from "../../app/hooks";
+import { delRow, DelRowPayload } from "./dataSlice";
 
 // nested type for EvalStatements
 export type EvalStatement = {
@@ -62,6 +62,19 @@ export const evalSlice = createSlice({
       const { index, statement } = action.payload;
       state.evalStatements.push(statement);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(delRow, (state, action: PayloadAction<DelRowPayload>) => {
+      // handle cascading deletes
+      const { index } = action.payload;
+      state.evalStatements = state.evalStatements.map((statement, index) => {
+        if (statement.rowIndex1 === index || statement.rowIndex2 === 0) {
+          statement.rowIndex1 = 0;
+          statement.rowIndex2 = 0;
+        }
+        return statement;
+      });
+    });
   },
 });
 
