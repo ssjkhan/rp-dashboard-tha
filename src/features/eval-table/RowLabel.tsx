@@ -40,12 +40,12 @@ function RowLabel(props: RowLabelPropsType) {
             const isFirst = index === 0;
 
             return (
-              <div className="flex">
+              <div className="flex h-8 lg:h-16">
                 {isFirst
                   ? (
                     <div className="flex">
                       <div
-                        className="text-white flex items-end py-1"
+                        className="text-white flex items-end lg:py-1"
                         onClick={() => handleAddBtnClick(index)}
                       >
                         <AddBtn />
@@ -53,15 +53,15 @@ function RowLabel(props: RowLabelPropsType) {
                     </div>
                   )
                   : (
-                    <div className="text-white flex-col justofy-between">
+                    <div className="text-white flex-col justify-between">
                       <div
-                        className="text-white py-1"
+                        className="text-white lg:py-1"
                         onClick={() => handleDelBtnClick(index)}
                       >
                         <RemoveBtn />
                       </div>
                       <div
-                        className="py-1"
+                        className="text-white lg:py-1"
                         onClick={() => handleAddBtnClick(index)}
                       >
                         <AddBtn />

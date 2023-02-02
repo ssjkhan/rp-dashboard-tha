@@ -39,9 +39,9 @@ function RowLabel(props: RowLabelProps) {
           <div className="flex" key={`label-dataRow-${index}`}>
             {isFirst
               ? (
-                <div className="flex items-end ">
+                <div className="flex items-end h-8 lg:h-16 ">
                   <div
-                    className="text-white py-1 "
+                    className="text-white lg:py-1 "
                     onClick={() => handleAddBtnClick(index)}
                   >
                     <AddBtn />
@@ -52,13 +52,13 @@ function RowLabel(props: RowLabelProps) {
                 <>
                   <div className="flex-col justify-between">
                     <div
-                      className="text-white "
+                      className="text-white lg:py-1"
                       onClick={() => handleRemoveBtnClick(index)}
                     >
                       <RemoveBtn />
                     </div>
                     <div
-                      className="text-white py-2"
+                      className="text-white lg:py-1"
                       onClick={() => handleAddBtnClick(index)}
                     >
                       <AddBtn />
