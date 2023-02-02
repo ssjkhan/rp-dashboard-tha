@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <div className="flex">
         <SideBar />
-        <div className="mx-auto mt-12 justify-center">
+        <div className="ml-5 mr-auto mt-12 justify-center">
           <div className="">
             <DataTable />
           </div>
