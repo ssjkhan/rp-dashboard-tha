@@ -2,6 +2,7 @@
   "name": "rp-dashboard-tha",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ssjkhan.github.io/rp-dashboard-tha",
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@headlessui/react": "^1.7.8",
