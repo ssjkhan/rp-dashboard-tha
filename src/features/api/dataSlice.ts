@@ -12,16 +12,9 @@ type dataState = {
 
 const initialState: dataState = {
   // intialize array with 7 elements and 5 rows
-  data: (function () {
-    // initArray safe as number[][] from intialization
-    const initArray = [] as number[][];
-    for (let i = 0; i < 5; i++) {
-      initArray.push(Array.from({ length: 7 }, (v, j) => {
-        return Math.round(Math.random());
-      }));
-    }
-    return initArray;
-  })(),
+  data: Array.from({ length: 5 }).fill(
+    Array.from({ length: 7 }).fill(0),
+  ) as number[][],
   rowCount: 5,
   colCount: 7,
 };
@@ -55,15 +48,26 @@ export const dataSlice = createSlice({
     },
     addCol: (state, action: PayloadAction<AddColPayload>) => {
       const { index } = action.payload;
-      state.data.splice(index - 1, 0, []);
+      const updatedData = state.data;
+
+      updatedData.forEach((col) => {
+        col.splice(index + 1, 0, 0);
+      });
+      state.data = updatedData;
+      state.colCount += 1;
     },
     deleteCol: (state, action: PayloadAction<DeleteColPayload>) => {
       const { index } = action.payload;
-      for (let row = 0; row < state.data.length; row++) {
-        if (state.data.length > 1) {
-          state.data[row].splice(index, 1);
+      const updatedData = state.data;
+
+      for (let row = 0; row < updatedData.length; row++) {
+        if (updatedData.length > 1) {
+          updatedData[row].splice(index, 1);
         }
       }
+
+      state.data = updatedData;
+      state.colCount -= 1;
     },
   },
 });

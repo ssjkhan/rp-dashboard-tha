@@ -1,6 +1,7 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
+  selectDataAll,
   selectDataCell,
   updateData,
   UpdateDataPayload,
@@ -18,6 +19,10 @@ function DataCell(props: DataCellProps) {
   const cellData = useAppSelector((state) => selectDataCell(state, row, col));
   const [val, setVal] = useState(DataToSymbol(cellData));
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setVal(DataToSymbol(cellData));
+  }, [cellData]);
 
   // Variable tailwind styling
   const cellClass =

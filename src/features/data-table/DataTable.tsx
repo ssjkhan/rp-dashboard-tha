@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-
+import { useAppSelector } from "../../app/hooks";
+import { useEffect } from "react";
 import { selectDataAll } from "../api/dataSlice";
 import HeaderRow from "./HeaderRow";
 import DataRow from "./DataRow";
@@ -9,9 +9,10 @@ import RowLabel from "./RowLabel";
 type DataTableProps = {};
 
 function DataTable({}: DataTableProps) {
-  const dispatch = useAppDispatch();
   const data = useAppSelector(selectDataAll);
-
+  useEffect(() => {
+    console.table(data);
+  }, [data]);
   return (
     <div>
       <div className="flex">
