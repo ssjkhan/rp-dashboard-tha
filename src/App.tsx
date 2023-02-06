@@ -12,10 +12,7 @@ function App() {
           <div className="">
             <DataTable />
           </div>
-          <div className="flex justify-end p-y-0 mt-3 underline">
-            Missing Features
-          </div>
-          <div className="flex">
+          <div className="mt-4 flex">
             <EvalTable />
             <MissingElements />
           </div>

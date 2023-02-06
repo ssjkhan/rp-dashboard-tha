@@ -10,7 +10,7 @@ function MissingElCell(props: MissingElCellPropsType) {
     <div className="flex">
       {isComplete
         ? (
-          <div className="w-8 h-8 lg:w-16 lg:h-16 flex items-center justify-center">
+          <div className="w-8 h-6 lg:w-16 lg:h-12 flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -29,10 +29,25 @@ function MissingElCell(props: MissingElCellPropsType) {
         )
         : (
           <>
-            <div className="w-8 h-8 lg:w-16 lg:h-16 flex items-center justify-center">
-              {elList.length}:
+            <div className="w-8 h-6 lg:w-16 lg:h-12 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 fill-amber-400 text-white "
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                />
+              </svg>
             </div>
-            <div className="w-auto h-8 lg:w-16 lg:h-16 flex items-center justify-start">
+            <div className="w-auto h-6 lg:w-auto lg:h-12 flex items-center justify-start">
+              {elList.length} feature{elList.length > 1 ? <>s</> : null}{" "}
+              missing:
               {elList.map((el: number) => {
                 return <span key={`missingEl-${el}`}>E{el + 1}&nbsp;</span>;
               })}

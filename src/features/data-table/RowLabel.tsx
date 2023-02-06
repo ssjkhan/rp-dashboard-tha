@@ -30,7 +30,9 @@ function RowLabel(props: RowLabelProps) {
   return (
     <div>
       <div className="h-4 lg:h-6">&nbsp;</div>
-      <div className="bg-transparent w-16 h-6 lg:w-24 lg:h-12">&nbsp;</div>
+      <div className="bg-transparent w-16 h-6 lg:w-24 lg:h-12 text-sm lg:text-base">
+        &nbsp;
+      </div>
 
       {labelArr.map((_, index: number) => {
         const isFirst = index === 0;
@@ -39,9 +41,9 @@ function RowLabel(props: RowLabelProps) {
           <div className="flex" key={`label-dataRow-${index}`}>
             {isFirst
               ? (
-                <div className="flex items-end h-8 lg:h-16 ">
+                <div className="flex items-end h-6 lg:h-12 ">
                   <div
-                    className="text-white lg:py-1 "
+                    className="text-white "
                     onClick={() => handleAddBtnClick(index)}
                   >
                     <AddBtn />
@@ -52,13 +54,13 @@ function RowLabel(props: RowLabelProps) {
                 <>
                   <div className="flex-col justify-between">
                     <div
-                      className="text-white lg:py-1"
+                      className="text-white"
                       onClick={() => handleRemoveBtnClick(index)}
                     >
                       <RemoveBtn />
                     </div>
                     <div
-                      className="text-white lg:py-1"
+                      className="text-white"
                       onClick={() => handleAddBtnClick(index)}
                     >
                       <AddBtn />
@@ -66,7 +68,7 @@ function RowLabel(props: RowLabelProps) {
                   </div>
                 </>
               )}
-            <div className="w-16 h-8 lg:w-24 lg:h-16 border-y-2 border-r-2 flex place-content-center items-center bg-slate-900 text-white rounded-l">
+            <div className="w-16 h-6 lg:w-24 lg:h-12 border-y-2 border-r-2 flex place-content-center items-center bg-slate-900 text-white rounded-l text-sm lg:text-base">
               {`R${index + 1}`}
             </div>
           </div>

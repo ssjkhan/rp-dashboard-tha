@@ -52,7 +52,7 @@ function HeaderCell(props: HeaderCellProps) {
             </div>
           </div>
         )}
-      <div className="w-16 lg:w-32 h-6 lg:h-12 flex place-content-center items-center text-center text-center text-white bg-slate-900 border-x-2 border-b-2 rounded-t">
+      <div className="w-16 lg:w-32 h-6 lg:h-12 flex place-content-center items-center text-center text-center text-white bg-slate-900 border-x-2 border-b-2 rounded-t text-sm lg:text-base">
         <div>
           E{index + 1}
         </div>

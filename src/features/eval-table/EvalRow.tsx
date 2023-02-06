@@ -29,7 +29,7 @@ function EvalRow(props: EvalRowType) {
           console.log(e);
         }
         var className =
-          "w-16 h-8 lg:w-32 lg:h-16 place-content-center flex items-center text-center border-2 rounded-md ";
+          "w-16 h-6 lg:w-32 lg:h-12 place-content-center flex items-center text-center border-2 rounded-md ";
 
         if (sum === 2) {
           className += " bg-lime-500 text-white";

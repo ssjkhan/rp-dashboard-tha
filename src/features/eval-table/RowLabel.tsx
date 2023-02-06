@@ -42,13 +42,13 @@ function RowLabel(props: RowLabelPropsType) {
             return (
               <div
                 key={`evalTable-rowLable-${index}`}
-                className="flex h-8 lg:h-16"
+                className="flex h-6 lg:h-12"
               >
                 {isFirst
                   ? (
                     <div className="flex">
                       <div
-                        className="text-white flex items-end lg:py-1"
+                        className="text-white flex items-end "
                         onClick={() => handleAddBtnClick(index)}
                       >
                         <AddBtn />
@@ -58,13 +58,13 @@ function RowLabel(props: RowLabelPropsType) {
                   : (
                     <div className="text-white flex-col justify-between">
                       <div
-                        className="text-white lg:py-1"
+                        className="text-white"
                         onClick={() => handleDelBtnClick(index)}
                       >
                         <RemoveBtn />
                       </div>
                       <div
-                        className="text-white lg:py-1"
+                        className="text-white"
                         onClick={() => handleAddBtnClick(index)}
                       >
                         <AddBtn />
@@ -73,7 +73,7 @@ function RowLabel(props: RowLabelPropsType) {
                   )}
                 <div
                   key={`evalRowLabel-${index}`}
-                  className="w-16 h-8 lg:w-24 lg:h-16 border-y-2 border-r-2 flex place-content-center items-center bg-slate-900 text-white rounded-lg"
+                  className="w-16 h-6 lg:w-24 lg:h-12 border-y-2 border-r-2 flex place-content-center items-center bg-slate-900 text-white rounded-lg"
                 >
                   <EvalOperand evalIndex={index} position={1} />
                   <div>&nbsp;+&nbsp;</div>
