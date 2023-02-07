@@ -3,6 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { delRow, DelRowPayload } from "./dataSlice";
 
+// const getState: any = {};
 // nested type for EvalStatements
 export type EvalStatement = {
   rowIndex1: number;
@@ -65,6 +66,20 @@ export const evalSlice = createSlice({
       state.evalStatements.push(statement);
       state.count += 1;
     },
+    validateStatements: (state, action: PayloadAction<{ index: number }>) => {
+      const { index } = action.payload;
+      console.log("Value of index ", index);
+      state.evalStatements = state.evalStatements.map((statement, _) => {
+        if (statement.rowIndex1 > index) {
+          statement.rowIndex1 = 0;
+        }
+        if (statement.rowIndex2 > index) {
+          statement.rowIndex2 = 0;
+        }
+
+        return statement;
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(delRow, (state, action: PayloadAction<DelRowPayload>) => {
@@ -90,8 +105,12 @@ export const evalSlice = createSlice({
 });
 
 // export actions and reducer
-export const { deleteStatement, updateStatement, addStatement } =
-  evalSlice.actions;
+export const {
+  deleteStatement,
+  updateStatement,
+  addStatement,
+  validateStatements,
+} = evalSlice.actions;
 export default evalSlice.reducer;
 
 // export selectors

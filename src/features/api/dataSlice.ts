@@ -1,22 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import {} from "../../app/hooks";
-
+import { selectStatementsAll, validateStatements } from "./evalSlice";
 // Type and initial state
-type dataState = {
+
+export type Data = {
   data: number[][];
   rowCount: number;
   colCount: number;
 };
 
-const initialState: dataState = {
+export type DataState = {
+  dataStore: Data[];
+  dataCount: number;
+  dataIndex: number;
+};
+
+const initialDataState: Data = {
   // intialize array with 7 elements and 5 rows
   data: Array.from({ length: 5 }).fill(
     Array.from({ length: 7 }).fill(0),
   ) as number[][],
   rowCount: 5,
   colCount: 7,
+};
+
+const initialState: DataState = {
+  dataStore: [initialDataState],
+  dataCount: 1,
+  dataIndex: 0,
 };
 
 // Payload action types
@@ -42,77 +54,151 @@ export type DelRowPayload = {
   index: number;
 };
 
+// todo
+export type AddDataPayload = {};
+
+export type DelDataPayload = {
+  index: number;
+};
+
+export type LoadDataPayload = {
+  index: number;
+};
+
 // State slice
 export const dataSlice = createSlice({
   name: "data",
-  initialState,
+  initialState: initialState,
   reducers: {
     resetData: (state) => {
-      state.data = [];
+      state.dataStore[state.dataIndex].data = [];
     },
     updateData: (state, action: PayloadAction<UpdateDataPayload>) => {
       const { rowIndex, colIndex, value } = action.payload;
-      state.data[rowIndex][colIndex] = value;
+      const { dataIndex } = state;
+      state.dataStore[dataIndex].data[rowIndex][colIndex] = value;
     },
     addCol: (state, action: PayloadAction<AddColPayload>) => {
       const { index } = action.payload;
+      const { dataIndex } = state;
 
-      state.data.forEach((col) => {
+      state.dataStore[dataIndex].data.forEach((col) => {
         col.splice(index + 1, 0, 0);
       });
-      state.data = state.data;
-      state.colCount += 1;
+      state.dataStore[dataIndex].colCount += 1;
     },
     deleteCol: (state, action: PayloadAction<DeleteColPayload>) => {
       const { index } = action.payload;
+      const { dataIndex } = state;
+      const currData = state.dataStore[dataIndex];
 
-      for (let row = 0; row < state.data.length; row++) {
-        if (state.data.length > 1) {
-          state.data[row].splice(index, 1);
+      for (let row = 0; row < currData.rowCount; row++) {
+        if (currData.rowCount > 1) {
+          currData.data[row].splice(index, 1);
         }
       }
 
-      state.data = state.data;
-      state.colCount -= 1;
+      currData.colCount -= 1;
     },
     addRow: (state, action: PayloadAction<AddRowPayload>) => {
       const { index } = action.payload;
+      const data = state.dataStore[state.dataIndex];
 
-      state.data.splice(
+      data.data.splice(
         index + 1,
         0,
-        Array.from({ length: state.colCount }).fill(0) as number[],
+        Array.from({ length: data.colCount }).fill(0) as number[],
       );
 
-      state.rowCount += 1;
+      data.rowCount += 1;
     },
     delRow: (state, action: PayloadAction<DelRowPayload>) => {
       const { index } = action.payload;
+      const data = state.dataStore[state.dataIndex];
 
-      state.data.splice(index, 1);
-      state.rowCount -= 1;
+      data.data.splice(index, 1);
+      data.rowCount -= 1;
+    },
+    newData: (state) => {
+      const newData: Data = {
+        data: [[0]] as number[][],
+        rowCount: 1,
+        colCount: 1,
+      };
+      state.dataStore.push(newData);
+      state.dataCount += 1;
+    },
+    delData: (state, action: PayloadAction<{ index: number }>) => {
+      const { index } = action.payload;
+      state.dataStore.splice(index, 1);
+
+      if (index === state.dataIndex) {
+        state.dataIndex = 0;
+      }
+      state.dataCount -= 1;
+    },
+    internalLoadData: (state, action: PayloadAction<{ index: number }>) => {
+      const { index } = action.payload;
+      state.dataIndex = index;
     },
   },
 });
 
 // export actions and reducer
-export const { resetData, updateData, addCol, deleteCol, addRow, delRow } =
-  dataSlice.actions;
+export const {
+  resetData,
+  updateData,
+  addCol,
+  deleteCol,
+  addRow,
+  delRow,
+  newData,
+  delData,
+  internalLoadData,
+} = dataSlice.actions;
 export default dataSlice.reducer;
+
+// Thunks for middleware
+
+export function loadData(index: number) {
+  return (dispatch: Function, getState: Function) => {
+    const rootState = getState();
+    const nextData = selectData(rootState, index);
+    const evalStatements = selectStatementsAll(rootState);
+
+    dispatch(validateStatements({ index: nextData.length - 1 }));
+
+    dispatch(internalLoadData({ index: index }));
+  };
+}
 
 // export selectors
 export const selectDataAll = (state: RootState) => {
-  return state.data.data;
+  return state.data.dataStore;
 };
 
-export const selectDataCell = (state: RootState, row: number, col: number) => {
-  return state.data.data[row][col];
+export const selectDataIndex = (state: RootState) => state.data.dataIndex;
+
+export const selectData = (state: RootState, index: number) => {
+  return state.data.dataStore[index].data;
 };
 
-export const selectDataRow = (state: RootState, row: number) => {
-  return state.data.data[row];
+export const selectDataCell = (
+  state: RootState,
+  index: number,
+  row: number,
+  col: number,
+) => {
+  const data = state.data.dataStore[index];
+  return data.data[row][col];
 };
 
-export const selectDataSize = (state: RootState) => {
-  return { rowCount: state.data.rowCount, colCount: state.data.colCount };
+export const selectDataRow = (state: RootState, index: number, row: number) => {
+  const currData = state.data.dataStore[index];
+  return currData.data[row];
+};
+
+export const selectDataSize = (state: RootState, index: number) => {
+  const currData = state.data.dataStore[index];
+  return { rowCount: currData.rowCount, colCount: currData.colCount };
 };
