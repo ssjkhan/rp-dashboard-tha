@@ -8,7 +8,7 @@ import {
   updateStatement,
   UpdateStatementAction,
 } from "../api/evalSlice";
-import { selectDataSize } from "../api/dataSlice";
+import { selectDataIndex, selectDataSize } from "../api/dataSlice";
 
 type EvalOperandType = {
   evalIndex: number;
@@ -24,10 +24,13 @@ function EvalOperandBtn(props: EvalOperandType) {
     false,
   );
   //get data from state
+  const dataIndex = useAppSelector(selectDataIndex);
   const { rowIndex1, rowIndex2 } = useAppSelector((state) =>
     selectStatementsIndex(state, evalIndex)
   );
-  const { rowCount: dataSize } = useAppSelector(selectDataSize);
+  const { rowCount: dataSize } = useAppSelector((state) =>
+    selectDataSize(state, dataIndex)
+  );
 
   // handler functions
   const handleClick = (_: MouseEvent<HTMLDivElement>, index: number) => {

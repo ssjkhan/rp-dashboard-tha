@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../app/hooks";
 import { selectStatementsIndex } from "../api/evalSlice";
-import { selectDataAll, selectDataSize } from "../api/dataSlice";
+import { selectData, selectDataIndex, selectDataSize } from "../api/dataSlice";
 
 type EvalRowType = {
   index: number;
@@ -8,8 +8,11 @@ type EvalRowType = {
 
 function EvalRow(props: EvalRowType) {
   const { index } = props;
-  const { colCount } = useAppSelector(selectDataSize);
-  const data = useAppSelector(selectDataAll);
+  const dataIndex = useAppSelector(selectDataIndex);
+  const { colCount } = useAppSelector((state) =>
+    selectDataSize(state, dataIndex)
+  );
+  const data = useAppSelector((state) => selectData(state, dataIndex));
   const { rowIndex1, rowIndex2 } = useAppSelector((state) =>
     selectStatementsIndex(state, index)
   );
@@ -25,8 +28,6 @@ function EvalRow(props: EvalRowType) {
         try {
           sum = getSum(rowIndex1, rowIndex2, colIndex);
         } catch (e) {
-          console.log(rowIndex1, rowIndex2, colIndex);
-          console.log(e);
         }
         var className =
           "w-16 h-6 lg:w-32 lg:h-12 place-content-center flex items-center text-center border-2 rounded-md ";
