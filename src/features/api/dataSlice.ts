@@ -173,7 +173,7 @@ export function loadData(index: number) {
     const nextData = selectData(rootState, index);
     const evalStatements = selectStatementsAll(rootState);
 
-    dispatch(validateStatements({ index: nextData.length - 1 }));
+    // dispatch(validateStatements({ index: nextData.length - 1 }));
 
     dispatch(internalLoadData({ index: index }));
   };
