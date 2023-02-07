@@ -10,7 +10,6 @@ function EvalTable({}: EvalTableProps) {
 
   return (
     <div className="flex">
-      <RowLabel />
       <div>
         {Array.from({ length: countStatements }).map(
           (_: unknown, index: number) => {

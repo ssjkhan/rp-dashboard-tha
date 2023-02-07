@@ -1,7 +1,6 @@
 import DataTable from "./features/data-table/DataTable";
 import SideBar from "./features/side-bar/SideBar";
 import EvalTable from "./features/eval-table/EvalTable";
-import MissingElements from "./features/missing-elements/MissingTable";
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
           </div>
           <div className="mt-4 flex">
             <EvalTable />
-            <MissingElements />
           </div>
         </div>
       </div>
