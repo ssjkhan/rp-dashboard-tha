@@ -119,17 +119,24 @@ export const dataSlice = createSlice({
       data.data.splice(index, 1);
       data.rowCount -= 1;
     },
-    newData: (state) => {
+    newData: (state, action: PayloadAction<{ row: number; col: number }>) => {
+      const { row, col } = action.payload;
+      const data = Array.from({ length: row }).map(() =>
+        Array.from({ length: col }).map(() => 0)
+      );
+      console.log(data);
       const newData: Data = {
-        data: [[0]] as number[][],
-        rowCount: 1,
-        colCount: 1,
+        data: data,
+        rowCount: row,
+        colCount: col,
       };
-      state.dataStore.push(initialDataState);
+      state.dataStore.push(newData);
       state.dataCount += 1;
     },
     delData: (state, action: PayloadAction<{ index: number }>) => {
       const { index } = action.payload;
+      const { dataCount } = state;
+      if (dataCount < 2) return;
       state.dataStore.splice(index, 1);
 
       if (index === state.dataIndex) {
@@ -178,6 +185,7 @@ export const selectDataAll = (state: RootState) => {
 };
 
 export const selectDataIndex = (state: RootState) => state.data.dataIndex;
+export const selectDataCount = (state: RootState) => state.data.dataCount;
 
 export const selectData = (state: RootState, index: number) => {
   return state.data.dataStore[index].data;

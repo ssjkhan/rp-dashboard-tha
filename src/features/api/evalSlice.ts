@@ -68,7 +68,6 @@ export const evalSlice = createSlice({
     },
     validateStatements: (state, action: PayloadAction<{ index: number }>) => {
       const { index } = action.payload;
-      console.log("Value of index ", index);
       state.evalStatements = state.evalStatements.map((statement, _) => {
         if (statement.rowIndex1 > index) {
           statement.rowIndex1 = 0;
