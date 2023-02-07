@@ -1,14 +1,17 @@
 import { useAppSelector } from "../../app/hooks";
 import { selectStatementsAll } from "../api/evalSlice";
-import { selectDataAll, selectDataSize } from "../api/dataSlice";
+import { selectData, selectDataIndex, selectDataSize } from "../api/dataSlice";
 import MissingElCell from "./MissingElementCell";
 
 type MissingElementsPropsType = {};
 
 function MissingElements(props: MissingElementsPropsType) {
   const statements = useAppSelector(selectStatementsAll);
-  const data = useAppSelector(selectDataAll);
-  const { colCount } = useAppSelector(selectDataSize);
+  const dataIndex = useAppSelector(selectDataIndex);
+  const data = useAppSelector((state) => selectData(state, dataIndex));
+  const { colCount } = useAppSelector((state) =>
+    selectDataSize(state, dataIndex)
+  );
 
   // calculate missing elements
 
