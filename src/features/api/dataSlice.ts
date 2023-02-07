@@ -125,7 +125,7 @@ export const dataSlice = createSlice({
         rowCount: 1,
         colCount: 1,
       };
-      state.dataStore.push(newData);
+      state.dataStore.push(initialDataState);
       state.dataCount += 1;
     },
     delData: (state, action: PayloadAction<{ index: number }>) => {

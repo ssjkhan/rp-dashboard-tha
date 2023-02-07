@@ -2,6 +2,7 @@ import DataTable from "./features/data-table/DataTable";
 import SideBar from "./components/side-bar/SideBar";
 import EvalTable from "./features/eval-table/EvalTable";
 import MissingElements from "./features/missing-elements/MissingTable";
+import DataLoadout from "./features/dataStore/DataLoadout";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           <div className="mt-4 flex">
             <EvalTable />
             <MissingElements />
+          </div>
+          <div className="mt-4 flex">
+            <DataLoadout />
           </div>
         </div>
       </div>
