@@ -32,7 +32,7 @@ function EvalRow(props: EvalRowType) {
       <RowLabel index={index} />
       {invalidRowRefs
         ? (
-          <div className="w-auto flex justify-center items-center mx-auto">
+          <div className="w-128 flex justify-center items-center mx-5 underline">
             Invalid Row Refs for this data set
           </div>
         )
