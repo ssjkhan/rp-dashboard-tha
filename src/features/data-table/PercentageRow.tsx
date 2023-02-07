@@ -1,12 +1,15 @@
-import { selectDataAll, selectDataSize } from "../api/dataSlice";
+import { selectData, selectDataIndex, selectDataSize } from "../api/dataSlice";
 import { useAppSelector } from "../../app/hooks";
 import PercentageCell from "./PercentCell";
 
 type PercentageRowProps = {};
 
 function PercentageRow(props: PercentageRowProps) {
-  const data = useAppSelector(selectDataAll);
-  const { rowCount, colCount } = useAppSelector(selectDataSize);
+  const dataIndex = useAppSelector(selectDataIndex);
+  const data = useAppSelector((state) => selectData(state, dataIndex));
+  const { rowCount, colCount } = useAppSelector((state) =>
+    selectDataSize(state, dataIndex)
+  );
   const percentArr: number[] = Array(colCount).fill(0);
   // linear scan and percentage match calculations
   for (let i = 0; i < rowCount; i++) {

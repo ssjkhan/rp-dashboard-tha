@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../app/hooks";
 import { useEffect } from "react";
-import { selectDataAll } from "../api/dataSlice";
+import { selectData, selectDataIndex } from "../api/dataSlice";
 import HeaderRow from "./HeaderRow";
 import DataRow from "./DataRow";
 import PercentageRow from "./PercentageRow";
@@ -9,7 +9,8 @@ import RowLabel from "./RowLabel";
 type DataTableProps = {};
 
 function DataTable({}: DataTableProps) {
-  const data = useAppSelector(selectDataAll);
+  const dataIndex = useAppSelector(selectDataIndex);
+  const data = useAppSelector((state) => selectData(state, dataIndex));
 
   return (
     <div>

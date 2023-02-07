@@ -1,5 +1,5 @@
 import DataCell from "./DataCell";
-import { selectDataRow } from "../api/dataSlice";
+import { selectDataIndex, selectDataRow } from "../api/dataSlice";
 import { useAppSelector } from "../../app/hooks";
 
 type DataRowProps = {
@@ -8,7 +8,10 @@ type DataRowProps = {
 
 function DataRow(props: DataRowProps) {
   const { rowIndex } = props;
-  const data = useAppSelector((state) => selectDataRow(state, rowIndex));
+  const dataIndex = useAppSelector(selectDataIndex);
+  const data = useAppSelector((state) =>
+    selectDataRow(state, dataIndex, rowIndex)
+  );
 
   return (
     <div className="flex">

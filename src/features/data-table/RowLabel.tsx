@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectDataSize } from "../api/dataSlice";
+import { selectDataIndex, selectDataSize } from "../api/dataSlice";
 import { addRow, AddRowPayload, delRow, DelRowPayload } from "../api/dataSlice";
 import AddBtn from "../../components/buttons/AddBtn";
 import RemoveBtn from "../../components/buttons/RemoveBtn";
@@ -7,7 +7,10 @@ import RemoveBtn from "../../components/buttons/RemoveBtn";
 type RowLabelProps = {};
 
 function RowLabel(props: RowLabelProps) {
-  const { rowCount } = useAppSelector(selectDataSize);
+  const dataIndex = useAppSelector(selectDataIndex);
+  const { rowCount } = useAppSelector((state) =>
+    selectDataSize(state, dataIndex)
+  );
   const labelArr = Array.from({ length: rowCount });
   const dispatch = useAppDispatch();
 

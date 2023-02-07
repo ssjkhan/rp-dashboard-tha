@@ -1,10 +1,11 @@
 import HeaderCell from "./HeaderCell";
 import { useAppSelector } from "../../app/hooks";
-import { selectDataRow } from "../api/dataSlice";
+import { selectDataIndex, selectDataRow } from "../api/dataSlice";
 type HeaderRowProps = {};
 
 function HeaderRow(props: HeaderRowProps) {
-  const data = useAppSelector((state) => selectDataRow(state, 0));
+  const dataIndex = useAppSelector(selectDataIndex);
+  const data = useAppSelector((state) => selectDataRow(state, dataIndex, 0));
 
   return (
     <div className="flex">

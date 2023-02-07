@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   selectDataCell,
+  selectDataIndex,
   updateData,
   UpdateDataPayload,
 } from "../api/dataSlice";
@@ -15,7 +16,10 @@ type DataCellProps = {
 function DataCell(props: DataCellProps) {
   const { rowIndex: row, colIndex: col } = props;
   const [isEdit, setEdit] = useState(false);
-  const cellData = useAppSelector((state) => selectDataCell(state, row, col));
+  const dataIndex = useAppSelector(selectDataIndex);
+  const cellData = useAppSelector((state) =>
+    selectDataCell(state, dataIndex, row, col)
+  );
   const [val, setVal] = useState(DataToSymbol(cellData));
   const dispatch = useAppDispatch();
 
