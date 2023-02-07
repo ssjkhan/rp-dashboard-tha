@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { selectStatementsAll, validateStatements } from "./evalSlice";
 // Type and initial state
 
 export type Data = {
@@ -142,6 +141,10 @@ export const dataSlice = createSlice({
       if (index === state.dataIndex) {
         state.dataIndex = 0;
       }
+
+      if (state.dataIndex > index) {
+        state.dataIndex -= 1;
+      }
       state.dataCount -= 1;
     },
     internalLoadData: (state, action: PayloadAction<{ index: number }>) => {
@@ -169,12 +172,6 @@ export default dataSlice.reducer;
 
 export function loadData(index: number) {
   return (dispatch: Function, getState: Function) => {
-    const rootState = getState();
-    const nextData = selectData(rootState, index);
-    const evalStatements = selectStatementsAll(rootState);
-
-    // dispatch(validateStatements({ index: nextData.length - 1 }));
-
     dispatch(internalLoadData({ index: index }));
   };
 }

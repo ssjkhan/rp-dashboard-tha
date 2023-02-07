@@ -10,8 +10,6 @@ export default function NewData() {
   const dataCount = useAppSelector(selectDataCount);
 
   function handleSubmit(e: any) {
-    e.preventDefault();
-
     dispatch(newData(dim));
     dispatch(loadData(dataCount));
   }
@@ -78,16 +76,16 @@ export default function NewData() {
                 />
               </div>
             </div>
-            <button
-              className="w-auto h-auto mx-1 my-1 py-1 px-1 text-white bg-primary border-2 border-primary rounded"
-              type="submit"
+            <label
+              htmlFor={id}
             >
-              <label
-                htmlFor={id}
+              <div
+                className="w-auto h-auto mx-1 my-1 py-1 px-1 text-white bg-primary border-2 border-primary rounded"
+                onClick={handleSubmit}
               >
                 Submit
-              </label>
-            </button>
+              </div>
+            </label>
           </div>
         </form>
         <div>

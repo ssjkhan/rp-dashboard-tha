@@ -76,14 +76,14 @@ function DataLoadout(props: DataLoadoutProps) {
                       Select
                     </label>
                   </div>
-                  <div
-                    onClick={(e) => handleDeleteData(index)}
-                    className="w-auto h-auto mx-1 my-1 py-1 px-1 text-white bg-red-500 border-2 border-red-500 rounded"
-                  >
-                    <label htmlFor={id}>
+                  <label>
+                    <div
+                      onClick={(e) => handleDeleteData(index)}
+                      className="w-auto h-auto mx-1 my-1 py-1 px-1 text-white bg-red-500 border-2 border-red-500 rounded"
+                    >
                       Delete
-                    </label>
-                  </div>
+                    </div>
+                  </label>
                 </div>
               );
             })}
