@@ -34,12 +34,13 @@ export default function NewTests() {
   }
 
   function handleChangeStatement(e: any, index: number, key: any) {
+    console.log(index, key);
     const updatedVal = Number(e.target.value) - 1;
     const updatedEvalStatements = [...evalSet.evalStatements];
     const updatedStatement = { ...updatedEvalStatements[index] };
 
     updatedStatement[key as keyof EvalStatement] = updatedVal;
-    updatedEvalStatements[0] = updatedStatement;
+    updatedEvalStatements[index] = updatedStatement;
 
     setEvalSet({
       ...evalSet,
