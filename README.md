@@ -6,7 +6,8 @@ Front end dashboard exercise
 
 ###### How to Use: Try it out live [here](https://ssjkhan.github.io/rp-dashboard-tha/)!
 
-![App Screenshot](https://raw.githubusercontent.com/ssjkhan/rp-dashboard-tha/main/images/screenshot.png?raw=true)
+![App Screenshot1](https://raw.githubusercontent.com/ssjkhan/rp-dashboard-tha/main/images/screenshot-2.png)
+![App TestSuite ScreenShot](https://raw.githubusercontent.com/ssjkhan/rp-dashboard-tha/main/images/screenshot-3.png)
 
 ## Features
 
