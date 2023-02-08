@@ -1,31 +1,26 @@
 import { useId } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { selectDataAll, selectDataIndex } from "../api/dataSlice";
 import {
-  delData,
-  loadData,
-  newData,
-  selectDataAll,
-  selectDataIndex,
-} from "../api/dataSlice";
+  delEvalSet,
+  loadEvalSet,
+  selectEvalIndex,
+  selectStatementsAll,
+} from "../api/evalSlice";
 import Modal from "../../components/modal/Modal";
 
-type DataLoadoutProps = {};
-
-function DataLoadout(props: DataLoadoutProps) {
+function LoadTests() {
   const id = useId();
-  const dataIndex = useAppSelector(selectDataIndex);
-  const data = useAppSelector(selectDataAll);
+  const evalIndex = useAppSelector(selectEvalIndex);
+  const evalSets = useAppSelector(selectStatementsAll);
   const dispatch = useAppDispatch();
 
-  function handleNewData() {
+  function handleDeleteEvalSet(index: number) {
+    dispatch(delEvalSet({ index: index }));
   }
 
-  function handleDeleteData(index: number) {
-    dispatch(delData({ index: index }));
-  }
-
-  function handleSelectData(index: number) {
-    dispatch(loadData(index));
+  function handleSelectEvalSet(index: number) {
+    dispatch(loadEvalSet({ index: index }));
   }
   return (
     <>
@@ -55,29 +50,29 @@ function DataLoadout(props: DataLoadoutProps) {
         <div>
           <div className="flex justify-around">
             <div className="mx-1 my-1 text-lg text-slate-900 font-bold flex items-center">
-              Current DataSet: {dataIndex}
+              Current Test Suite: {evalIndex}
             </div>
           </div>
           <div>
-            {data.map((data, index) => {
+            {evalSets.map((evalSet, index) => {
               return (
                 <div
                   key={index}
                   className="flex my-1 items-center"
                 >
                   <div className="mr-auto">
-                    Data Set #{index} {`(${data.rowCount} x ${data.colCount})`}
+                    Test Suite #{index} {`Test Count (${evalSet.count})`}
                   </div>
                   <div
                     className="w-auto h-auto mx-1 my-1 py-1 px-1 text-white bg-primary border-2 border-primary rounded"
-                    onClick={() => handleSelectData(index)}
+                    onClick={() => handleSelectEvalSet(index)}
                   >
                     <label htmlFor={id}>
                       Select
                     </label>
                   </div>
                   <div
-                    onClick={(e) => handleDeleteData(index)}
+                    onClick={(e) => handleDeleteEvalSet(index)}
                     className="w-auto h-auto mx-1 my-1 py-1 px-1 text-white bg-red-500 border-2 border-red-500 rounded"
                   >
                     <label htmlFor={id}>
@@ -94,4 +89,4 @@ function DataLoadout(props: DataLoadoutProps) {
   );
 }
 
-export default DataLoadout;
+export default LoadTests;
