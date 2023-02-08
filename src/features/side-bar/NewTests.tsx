@@ -30,20 +30,21 @@ export default function NewTests() {
     e.preventDefault();
 
     dispatch(newEvalSet(evalSet));
-    setEvalSet(initialEvalSet);
     dispatch(loadEvalSet({ index: evalCount }));
   }
 
   function handleChangeStatement(e: any, index: number, key: any) {
-    // e.preventDefault();
     const updatedVal = Number(e.target.value) - 1;
-    const updatedSet = { ...evalSet };
-    const updatedStatement = { ...updatedSet.evalStatements[index] };
+    const updatedEvalStatements = [...evalSet.evalStatements];
+    const updatedStatement = { ...updatedEvalStatements[index] };
 
     updatedStatement[key as keyof EvalStatement] = updatedVal;
-    updatedSet.evalStatements[index] = updatedStatement;
+    updatedEvalStatements[0] = updatedStatement;
 
-    setEvalSet(updatedSet);
+    setEvalSet({
+      ...evalSet,
+      evalStatements: updatedEvalStatements,
+    });
   }
 
   function handleChangeCount(e: any) {
