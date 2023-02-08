@@ -1,25 +1,77 @@
 import { useId, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
-import { loadData, newData, selectDataCount } from "../api/dataSlice";
+import {
+  EvalSet,
+  EvalStatement,
+  loadEvalSet,
+  newEvalSet,
+  selectEvalCount,
+} from "../api/evalSlice";
 import Modal from "../../components/modal/Modal";
+
+const initialStatement: EvalStatement[] = [{
+  rowIndex1: 0,
+  rowIndex2: 1,
+}];
+
+const initialEvalSet: EvalSet = {
+  evalStatements: initialStatement,
+  count: 1,
+};
 
 export default function NewTests() {
   const id = useId();
-  const [dim, setDim] = useState({ row: 5, col: 7 });
+  const [evalSet, setEvalSet] = useState(initialEvalSet);
   const dispatch = useAppDispatch();
-  const dataCount = useAppSelector(selectDataCount);
+  const evalCount = useAppSelector(selectEvalCount);
 
   function handleSubmit(e: any) {
     e.preventDefault();
 
-    dispatch(newData(dim));
-    dispatch(loadData(dataCount));
+    dispatch(newEvalSet(evalSet));
+    setEvalSet(initialEvalSet);
+    dispatch(loadEvalSet({ index: evalCount }));
   }
 
-  function handleChange(e: any) {
-    e.preventDefault();
-    setDim({ ...dim, [e.target.name]: Number(e.target.value) });
+  function handleChangeStatement(e: any, index: number, key: any) {
+    // e.preventDefault();
+    const updatedVal = Number(e.target.value) - 1;
+    const updatedSet = { ...evalSet };
+    const updatedStatement = { ...updatedSet.evalStatements[index] };
+
+    updatedStatement[key as keyof EvalStatement] = updatedVal;
+    updatedSet.evalStatements[index] = updatedStatement;
+
+    setEvalSet(updatedSet);
+  }
+
+  function handleChangeCount(e: any) {
+    const re = /^(\s*|\d+)$/;
+
+    if (!re.test(e.target.value)) {
+      return;
+    }
+
+    const updatedCount = Number(e.target.value);
+    if (updatedCount < 0) return;
+
+    const updatedStatements = [...evalSet.evalStatements];
+
+    while (updatedCount > updatedStatements.length) {
+      updatedStatements.push({ rowIndex1: 1, rowIndex2: 2 });
+    }
+
+    while (updatedCount < updatedStatements.length) {
+      updatedStatements.pop();
+    }
+
+    const updatedEvalSet: EvalSet = {
+      evalStatements: updatedStatements,
+      count: updatedCount,
+    };
+
+    setEvalSet(updatedEvalSet);
   }
 
   return (
@@ -48,7 +100,7 @@ export default function NewTests() {
       </label>
       <Modal id={id}>
         <div className="flex justify-center text-lg text-slate-900 font-bold">
-          Add New Data
+          New Test Suite
         </div>
         <form onSubmit={handleSubmit}>
           <div className="flex justify-between">
@@ -58,24 +110,11 @@ export default function NewTests() {
                 <input
                   id={`${id}-row`}
                   type="text"
-                  name="row"
-                  onChange={handleChange}
-                  value={dim.row}
+                  name="count"
+                  onChange={handleChangeCount}
+                  value={evalSet.count}
                   className="border-2 border-slate-900 rounded mx-1 w-16"
                   placeholder="5"
-                />
-              </div>
-              <div className="flex items-center">
-                <label htmlFor={`${id}-col`}>Col</label>
-
-                <input
-                  id={`${id}-col`}
-                  type="text"
-                  name="col"
-                  onChange={handleChange}
-                  value={dim.col}
-                  className="border-2 border-slate-900 rounded mx-1 w-16"
-                  placeholder="7"
                 />
               </div>
             </div>
@@ -92,16 +131,51 @@ export default function NewTests() {
           </div>
         </form>
         <div>
-          {Array.from({ length: dim.row }).map((_, index) => {
+          {evalSet.evalStatements.map((statement, index) => {
             return (
-              <div key={index} className="my-1 flex justify-center">
-                {Array.from({ length: dim.col }).map((_, index) => {
-                  return (
-                    <div key={index} className="mx-1 bg-slate-900 w-4 h-4">
-                      &nbsp;
-                    </div>
-                  );
-                })}
+              <div key={index} className="my-1 flex justify-between">
+                <div className="flex">
+                  <div className="mr-4 underline">Evaluation {index + 1}</div>
+                  <div className="w-auto">
+                    Row
+                  </div>
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      handleChangeStatement(e, index, "rowIndex1")}
+                    className="w-16 border-2 border-slate-500 rounded mx-2"
+                    value={statement.rowIndex1 + 1}
+                  />
+                </div>
+                <div className="px-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 4.5v15m7.5-7.5h-15"
+                    />
+                  </svg>
+                </div>
+
+                <div className="flex">
+                  <div className="w-auto">
+                    Row
+                  </div>
+                  <input
+                    type="text"
+                    onChange={(e) =>
+                      handleChangeStatement(e, index, "rowIndex2")}
+                    className="w-16 border-2 border-slate-500 rounded mx-2"
+                    value={statement.rowIndex2 + 1}
+                  />
+                </div>
               </div>
             );
           })}

@@ -9,18 +9,18 @@ export type EvalStatement = {
   rowIndex2: number;
 };
 
-export type EvalState = {
+export type EvalSet = {
   evalStatements: EvalStatement[];
   count: number;
 };
 
-export type EvalState2 = {
-  evalStore: EvalState[];
+export type EvalState = {
+  evalStore: EvalSet[];
   evalCount: number;
   evalIndex: number;
 };
 
-const initialEvalState: EvalState = {
+const initialEvalState: EvalSet = {
   // intialize statements with 5  combinations
   evalStatements: (function () {
     // initArray safe as EvalStatement[] from intialization
@@ -38,7 +38,7 @@ const initialEvalState: EvalState = {
   count: 5,
 };
 
-const initialState: EvalState2 = {
+const initialState: EvalState = {
   evalStore: [initialEvalState],
   evalCount: 1,
   evalIndex: 0,
@@ -101,16 +101,15 @@ export const evalSlice = createSlice({
         },
       );
     },
-    newEvalSet: (
-      state,
-      action: PayloadAction<{ count: number }>,
-    ) => {
-      const { count } = action.payload;
-      const newEvalSet: EvalState = {
-        evalStatements: Array.from({ length: count }),
+    newEvalSet: (state, action: PayloadAction<EvalSet>) => {
+      const { count, evalStatements } = action.payload;
+      console.log(evalStatements);
+      const newEvalSet: EvalSet = {
+        evalStatements: evalStatements,
         count: count,
       };
       state.evalStore.push(newEvalSet);
+      state.evalCount += 1;
     },
     delEvalSet: (state, action: PayloadAction<{ index: number }>) => {
       const { index } = action.payload;
